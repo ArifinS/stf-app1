@@ -29,7 +29,7 @@ export default function CommercialHero() {
   }, [])
 
   return (
-    <section className="relative h-[400px] w-full overflow-hidden">
+    <section className="relative h-[600px] w-full overflow-hidden">
       {/* Background Slides */}
       <AnimatePresence mode="wait">
         {slides.map(

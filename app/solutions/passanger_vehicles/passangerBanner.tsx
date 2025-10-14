@@ -3,7 +3,6 @@
 import { ChevronRight } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useEffect, useState } from "react"
-import VehicleSolutions from "../two_wheeler/VehicleSolutions2"
 
 // --- Slides Data ---
 const slides = [
@@ -102,7 +101,6 @@ export default function PassngerBanner() {
       </div>
 
       {/* Section below the banner */}
-      <VehicleSolutions />
     </section>
   )
 }
