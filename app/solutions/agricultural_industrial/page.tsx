@@ -1,8 +1,7 @@
 import React from "react";
 import MenuItem from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import ThreeAdvantages from "./hero";
-import AgriIndustrialSlider from "./agriculturalBanner";
+import STFAutomationTransport from "./agriculturalBanner";
 
 
 export default function BatteryStoragePage() {
@@ -11,7 +10,7 @@ export default function BatteryStoragePage() {
       <header className="w-full">
         <MenuItem />
       </header>
-        <AgriIndustrialSlider/>
+        <STFAutomationTransport/>
       <footer className="w-full flex justify-center">
         <Footer />
       </footer>
