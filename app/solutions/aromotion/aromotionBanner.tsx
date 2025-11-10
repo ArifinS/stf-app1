@@ -17,44 +17,30 @@ export default function PremiumSlider() {
   const [direction, setDirection] = useState<"next" | "prev">("next");
 
   const slides: Slide[] = [
-    {
-      id: 1,
-      title: "Mountain Peaks",
-      subtitle: "Reach New Heights",
-      description:
-        "Discover breathtaking landscapes where earth meets sky",
-      image:
-        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80",
-      color: "#0ea5e9",
-    },
-    {
-      id: 2,
-      title: "Urban Dreams",
-      subtitle: "City That Never Sleeps",
-      description: "Experience the pulse of modern metropolitan life",
-      image:
-        "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=1920&q=80",
-      color: "#8b5cf6",
-    },
-    {
-      id: 3,
-      title: "Ocean Horizons",
-      subtitle: "Endless Possibilities",
-      description: "Dive into the serene beauty of coastal paradise",
-      image:
-        "https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=1920&q=80",
-      color: "#06b6d4",
-    },
-    {
-      id: 4,
-      title: "Desert Sunset",
-      subtitle: "Golden Moments",
-      description:
-        "Where tranquility meets the warmth of endless horizons",
-      image:
-        "https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=1920&q=80",
-      color: "#f59e0b",
-    },
+  {
+    id: 1,
+    title: "AeroMotion",
+    subtitle: "Reach New Heights",
+    description: "AeroMotion is a visionary transportation lineup bringing advanced dynamic problem solution to bring highest speed for the fastest transportation system to solve the complex dynamic problem.",
+    image: "/images/aromotion/ae1.png",
+    color: "#0ea5e9",
+  },
+  {
+    id: 2,
+    title: "Custom Aero Solution",
+    subtitle: "Your Requirement, Our Commitment",
+    description: "At STF Automotive, our Aero Motion Solutions deliver custom-designed aerial systems—from drones to air taxis—engineered to meet unique performance needs and specialized altitude requirements. We blend innovation, efficiency, and precision engineering to shape the next era of smart air mobility.",
+    image: "/images/aromotion/ae2.png",
+    color: "#8b5cf6",
+  },
+  {
+    id: 3,
+    title: "Aero Sourcing",
+    subtitle: "Quality with Reliability for Your Product",
+    description: "STF Automotive provides specialized sourcing solutions for the aerospace and drone industry, offering high-quality motors, propellers, control systems, and structural components. Our goal is to deliver reliable, efficient, and performance-ready parts that power the next generation of air mobility solutions.",
+    image: "/images/aromotion/ae3.png",
+    color: "#f59e0b",
+  },
   ];
 
   const nextSlide = () => {

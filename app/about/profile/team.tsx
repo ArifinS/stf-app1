@@ -21,7 +21,7 @@ const teamMembers = [
   },
   {
     id: 3,
-    name: "Md Abu Tahe",
+    name: "Md Abu Taher",
     role: "Founder Denting technician",
     description: "I'm the chief executive of sales and closed valuable deals that helped pagedone in growth.",
        image: "/images/team/team-2.jpg",
@@ -41,7 +41,7 @@ export default function TeamGrid() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Our brilliant team</h2>
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Brilliant Team</h2>
           <p className="text-lg text-gray-600">These people work on making our product best.</p>
         </motion.div>
 

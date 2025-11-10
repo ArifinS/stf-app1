@@ -17,43 +17,59 @@ type Card = {
 const CARDS: Card[] = [
   {
     id: "iphone-17-pro",
-    title: "iPhone 17 Pro",
+    title: "Two Wheeler Solutions",
     subtitle: "All out Pro.",
     price: "From $999 or $41.79/mo. for 24 mo.",
     tone: "light",
-    image: "/images/apple/1.jpg",
+    image: "/images/apple/1.png",
   },
   {
     id: "iphone-air",
-    title: "iPhone Air",
+    title: "Marin Transportation Solutions",
     subtitle: "The thinnest iPhone ever.",
     price: "From $599 or $24.12/mo. for 24 mo.",
     tone: "light",
-    image: "/images/apple/2.jpg",
+    image: "/images/apple/2.png",
   },
   {
-    id: "iphone-17",
-    title: "iPhone 17",
+    id: "iphone-18",
+    title: "Commercial Vehecal Solutions",
     subtitle: "Magichromatic.",
     price: "From $799 or $33.29/mo. for 24 mo.",
     tone: "light",
-    image: "/images/apple/3.jpg",
+    image: "/images/apple/3.png",
   },
   {
     id: "watch-s11",
-    title: "Apple Watch Series 11",
+    title: "Aromotion Solution",
     subtitle: "The ultimate way to keep your health on track.",
     price: "From $399 or $33.25/mo. for 12 mo.",
     tone: "light",
-    image: "/images/apple/4.jpg",
+    image: "/images/apple/7.png",
   },
   {
     id: "watch-se",
-    title: "Apple Watch SE",
+    title: "Agriculture and industrial Automotive solution",
     subtitle: "Walk it. Talk it. Track it.",
     price: "From $249 or $20.75/mo. for 12 mo.",
     tone: "light",
-    image: "/images/apple/2.jpg",
+  image: "/images/apple/8.png",
+  },
+    {
+    id: "watch-se",
+    title: "Passerger Vehecal Solutions",
+    subtitle: "Walk it. Talk it. Track it.",
+    price: "From $249 or $20.75/mo. for 12 mo.",
+    tone: "light",
+  image: "/images/apple/4.png",
+  },
+     {
+    id: "watch-se",
+    title: "Automotive Lifestife",
+    subtitle: "Walk it. Talk it. Track it.",
+    price: "From $249 or $20.75/mo. for 12 mo.",
+    tone: "light",
+  image: "/images/apple/9.png",
   },
 ];
 
@@ -63,11 +79,10 @@ export default function LatestSlider() {
       align: "start",
       dragFree: true,
       containScroll: "trimSnaps",
-      skipSnaps: false,
       loop: true,
-      duration: 35, // smoother animation speed
+      duration: 30,
     },
-    [Autoplay({ delay: 3000, stopOnInteraction: false })]
+    [Autoplay({ delay: 3200, stopOnInteraction: false })]
   );
 
   const [canScrollPrev, setCanScrollPrev] = useState(false);
@@ -76,9 +91,9 @@ export default function LatestSlider() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const fullSubtitle = "Take a look at new, right now.";
+  const fullSubtitle = "Take a look at our solutions, right now.";
 
-  // ✨ Typing Animation
+  // Typing Animation
   useEffect(() => {
     const handleTyping = () => {
       if (isDeleting) {
@@ -90,7 +105,7 @@ export default function LatestSlider() {
         setCurrentIndex(currentIndex - 1);
       } else {
         if (currentIndex === fullSubtitle.length) {
-          setIsDeleting(true);
+          setTimeout(() => setIsDeleting(true), 1500);
           return;
         }
         setTypedText((prev) => prev + fullSubtitle[currentIndex]);
@@ -98,11 +113,11 @@ export default function LatestSlider() {
       }
     };
 
-    const timer = setTimeout(handleTyping, isDeleting ? 30 : 60);
+    const timer = setTimeout(handleTyping, isDeleting ? 40 : 80);
     return () => clearTimeout(timer);
   }, [currentIndex, isDeleting, fullSubtitle]);
 
-  // ✨ Navigation Buttons Control
+  // Navigation Controls
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
     setCanScrollPrev(emblaApi.canScrollPrev());
@@ -119,14 +134,14 @@ export default function LatestSlider() {
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
 
-  // ✨ Pause auto-scroll on hover
+  // Pause on hover
   useEffect(() => {
     if (!emblaApi) return;
     const autoplay = emblaApi.plugins()?.autoplay;
     const node = emblaApi.rootNode();
 
-    const handleMouseEnter = () => autoplay && autoplay.stop();
-    const handleMouseLeave = () => autoplay && autoplay.play();
+    const handleMouseEnter = () => autoplay?.stop();
+    const handleMouseLeave = () => autoplay?.play();
 
     node.addEventListener("mouseenter", handleMouseEnter);
     node.addEventListener("mouseleave", handleMouseLeave);
@@ -138,138 +153,129 @@ export default function LatestSlider() {
   }, [emblaApi]);
 
   return (
-    <section className="w-full pt-[100px] overflow-hidden">
-      <div className="mx-auto max-w-7xl px-4 md:px-8">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-black mb-2 text-balance">
-          The latest.{" "}
-          <span className="text-gray-600">
-            {typedText}
-            <span className="animate-pulse">|</span>
-          </span>
-        </h2>
+    <section className="relative w-full pt-24 pb-32 overflow-hidden bg-gradient-to-b from-white via-gray-50 to-white">
+
+      <div className="mx-auto max-w-7xl px-4 md:px-8 relative z-10">
+        {/* Hero Title with Typing */}
+        <div className="text-center mb-16">
+          <h2 className="text-5xl sm:text-6xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 via-zinc-700 to-zinc-900 mb-3">
+            The latest.
+          </h2>
+          <p className="text-xl md:text-2xl text-zinc-600 font-medium">
+            <span className="inline-block min-w-[16ch] text-left">
+              {typedText}
+              <span className="inline-block w-1 h-7 bg-gradient-to-b from-violet-600 to-pink-600 ml-1 animate-pulse"></span>
+            </span>
+          </p>
+        </div>
       </div>
 
-      <div className="relative mt-6">
-        <div className="px-2 md:px-6">
-          <div className="overflow-hidden" ref={emblaRef}>
-            <div className="flex gap-4 md:gap-6">
-              {CARDS.map((card, index) => (
-                <article
-                  key={`${card.id}-${index}`}
-                  className={cn(
-                    "group mt-8 mb-8 shrink-0 h-[460px] sm:h-[480px] md:h-[502px] w-[82%] sm:w-[380px] md:w-[460px] rounded-2xl border overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.02]",
-                    card.tone === "dark"
-                      ? "bg-black text-white border-black/10"
-                      : "bg-white text-black border-black/10"
-                  )}
-                >
-                  {/* Text Section */}
-                  <div className="p-5 md:p-6">
-                    <h3
-                      className={cn(
-                        "text-lg md:text-xl font-semibold leading-tight",
-                        card.tone === "dark" ? "text-white" : "text-zinc-900"
-                      )}
-                    >
-                      {card.title}
-                    </h3>
-                    <p
-                      className={cn(
-                        "mt-1 text-sm md:text-[15px]",
-                        card.tone === "dark"
-                          ? "text-zinc-300"
-                          : "text-zinc-600"
-                      )}
-                    >
-                      {card.subtitle}
-                    </p>
-                    <p
-                      className={cn(
-                        "mt-3 text-xs md:text-sm",
-                        card.tone === "dark"
-                          ? "text-zinc-400"
-                          : "text-zinc-500"
-                      )}
-                    >
-                      {card.price}
-                    </p>
-                  </div>
+      {/* Carousel */}
+      <div className="relative">
+        <div className="overflow-hidden" ref={emblaRef}>
+          <div className="flex gap-6 px-4 md:px-8">
+            {CARDS.map((card, index) => (
+              <article
+                key={`${card.id}-${index}`}
+                className={cn(
+                  "group relative flex-shrink-0 w-[85vw] sm:w-[380px] md:w-[460px] h-[540px] rounded-3xl overflow-hidden",
+                  "bg-white/80 backdrop-blur-xl border border-black/20 ",
+                  "transition-all duration-700 ease-out",
+                  " hover:-translate-y-4",
+                  "cursor-grab active:cursor-grabbing"
+                )}
+                style={{
+                  transform: `perspective(1000px) rotateY(${index % 2 === 0 ? '-2deg' : '2deg'})`,
+                  transition: 'all 0.7s cubic-bezier(0.16, 1, 0.3, 1)',
+                }}
+              >
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-white/40 via-transparent to-white/20 pointer-events-none z-10"></div>
 
-                  {/* Image Section */}
-                  <div
-                    className={cn(
-                      "mx-3 mb-3 h-[300px] sm:h-[320px] rounded-xl overflow-hidden relative flex items-center justify-center",
-                      card.tone === "dark" ? "bg-zinc-900" : "bg-zinc-50"
-                    )}
-                  >
-                    {card.image ? (
-                      <div className="w-full h-full overflow-hidden relative">
-                        <Image
-                          src={card.image}
-                          alt={card.title}
-                          fill
-                          className="object-cover transition-transform duration-700 group-hover:scale-110"
-                        />
-                      </div>
-                    ) : (
-                      <div className="h-24 w-24 rounded-[22%] bg-gradient-to-br from-zinc-200 to-zinc-50 border border-zinc-200" />
-                    )}
-                  </div>
-                </article>
-              ))}
-            </div>
+                {/* Image Container */}
+                <div className="relative h-[380px] overflow-hidden">
+                  {card.image ? (
+                    <Image
+                      src={card.image}
+                      alt={card.title}
+                      fill
+                      className="object-cover transition-transform duration-1000 group-hover:scale-110"
+                      priority={index < 2}
+                    />
+                  ) : (
+                    <div className="h-full w-full bg-gradient-to-br from-zinc-100 to-zinc-200 flex items-center justify-center">
+                      <div className="w-32 h-32 rounded-3xl bg-gradient-to-br from-zinc-300 to-zinc-100"></div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Content */}
+                <div className="relative p-8 z-20 bg-gradient-to-t from-white via-white to-transparent">
+                  <h3 className="text-2xl md:text-3xl font-bold text-zinc-900 mb-2">
+                    {card.title}
+                  </h3>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
 
-        {/* Navigation Buttons */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 right-0 flex items-center justify-between px-1 md:px-3">
+        {/* Glowing Navigation */}
+        <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-4 md:px-8 pointer-events-none">
           <button
-            aria-label="Previous"
             onClick={scrollPrev}
             disabled={!canScrollPrev}
             className={cn(
-              "pointer-events-auto inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/90 shadow-sm ring-1 ring-black/10 backdrop-blur transition-all hover:scale-110",
-              !canScrollPrev && "opacity-40"
+              "pointer-events-auto w-14 h-14 rounded-full",
+              "bg-white/90 backdrop-blur-xl shadow-xl border border-white/30",
+              "flex items-center justify-center transition-all duration-300",
+              "hover:scale-110 hover:shadow-2xl hover:shadow-violet-500/30",
+              canScrollPrev ? "opacity-100" : "opacity-30 cursor-not-allowed"
             )}
           >
             <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
+              className="w-6 h-6 text-zinc-800"
               fill="none"
               stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >                                                             
-              <path d="m15 18-6-6 6-6" />
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
 
           <button
-            aria-label="Next"
             onClick={scrollNext}
             disabled={!canScrollNext}
             className={cn(
-              "pointer-events-auto inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/90 shadow-sm ring-1 ring-black/10 backdrop-blur transition-all hover:scale-110",
-              !canScrollNext && "opacity-40"
+              "pointer-events-auto w-14 h-14 rounded-full",
+              "bg-white/90 backdrop-blur-xl shadow-xl border border-white/30",
+              "flex items-center justify-center transition-all duration-300",
+              "hover:scale-110 hover:shadow-2xl hover:shadow-pink-500/30",
+              canScrollNext ? "opacity-100" : "opacity-30 cursor-not-allowed"
             )}
           >
             <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
+              className="w-6 h-6 text-zinc-800"
               fill="none"
               stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+              viewBox="0 0 24 24"
             >
-              <path d="m9 18 6-6-6-6" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </button>
         </div>
       </div>
+
+      {/* Custom CSS Animations */}
+      <style jsx>{`
+        @keyframes pulse-slow {
+          0%, 100% { opacity: 0.2; transform: scale(1); }
+          50% { opacity: 0.4; transform: scale(1.1); }
+        }
+        .animate-pulse-slow {
+          animation: pulse-slow 6s ease-in-out infinite;
+        }
+      `}</style>
     </section>
   );
 }

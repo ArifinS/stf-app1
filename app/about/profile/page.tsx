@@ -3,7 +3,6 @@
 import React from "react";
 import MenuItem from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import History from "./History";
 import TeamGrid from "./team";
 
 export default function CompanyProfilePage() {
@@ -13,8 +12,7 @@ export default function CompanyProfilePage() {
         <MenuItem />
       </header>
       <main>
-        <TeamGrid/>
-        <History/>
+        <TeamGrid/> 
       </main>
       <footer className="w-full flex justify-center">
         <Footer />

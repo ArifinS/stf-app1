@@ -74,11 +74,11 @@ export default function MissionVision() {
                     style={{ display: "inline-block" }} // Ensure proper rendering
                   />
                 </h2>
-                <p className="mt-5 max-w-xl text-sm md:text-[15px] leading-relaxed text-zinc-500">
-                  We believe in the power of creativity to transform ideas into impactful digital experiences. Founded with a passion for
-                  innovation, we are a team of visionary creators, strategic thinkers, and tech-savvy professionals dedicated to bringing your brand’s
-                  story to life in the digital realm.
-                </p>
+              <p className="mt-5 max-w-xl text-sm md:text-[15px] leading-relaxed text-zinc-500">
+                We believe in the power of creativity to transform ideas into engineering revolutions. 
+                <br />
+                Founded with a passion for innovation, we are a team of visionary creators and strategic thinkers dedicated to fulfilling customer needs and requirements.
+              </p>
               </div>
             </div>
 

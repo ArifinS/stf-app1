@@ -1,11 +1,15 @@
 "use client"
 
-import { ChevronRight } from "lucide-react"
+import { ChevronRight, ChevronLeft } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useEffect, useState } from "react"
 
-// --- Slides Data ---
-const slides = [
+type Slide = {
+  id: number
+  title: string
+  image: string
+}
+const slides: Slide[] = [
   {
     id: 1,
     title: "Passenger Vehicles Solutions",
@@ -17,90 +21,218 @@ const slides = [
     image: "/images/passagervehecals/one.png",
   },
 ]
-
-export default function PassngerBanner() {
+export default function PassengerBanner() {
   const [current, setCurrent] = useState(0)
+  const [direction, setDirection] = useState(0)
+  const [progress, setProgress] = useState(0)
 
-  // Auto-slide every 4 seconds
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % slides.length)
-    }, 4000)
+    const duration = 5000
+    const interval = 50
+    const increment = (interval / duration) * 100
 
-    return () => clearInterval(interval)
-  }, [])
+    const progressInterval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          setDirection(1)
+          setCurrent((prevCurrent) => (prevCurrent + 1) % slides.length)
+          return 0
+        }
+        return prev + increment
+      })
+    }, interval)
+
+    return () => clearInterval(progressInterval)
+  }, [current])
+
+  const handleNext = () => {
+    setDirection(1)
+    setCurrent((prev) => (prev + 1) % slides.length)
+    setProgress(0)
+  }
+
+  const handlePrev = () => {
+    setDirection(-1)
+    setCurrent((prev) => (prev - 1 + slides.length) % slides.length)
+    setProgress(0)
+  }
+  const handleDotClick = (index: number) => {
+    setDirection(index > current ? 1 : -1)
+    setCurrent(index)
+    setProgress(0)
+  }
+
+
+  const slideVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? 1200 : -1200,
+      opacity: 0,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+    },
+    exit: (direction: number) => ({
+      x: direction < 0 ? 1200 : -1200,
+      opacity: 0,
+    }),
+  }
 
   return (
-    <section className="relative h-[400px] md:h-[700px] w-full overflow-hidden">
+    <section
+      className="relative h-[500px] md:h-[700px] w-full overflow-hidden bg-gray-900"
+    >
       {/* Background Slides */}
-      <AnimatePresence mode="wait">
-        {slides.map(
-          (slide, index) =>
-            index === current && (
-              <motion.div
-                key={slide.id}
-                initial={{ opacity: 0, scale: 1.05 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 1.05 }}
-                transition={{ duration: 1 }}
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                style={{
-                  backgroundImage: `url(${slide.image})`,
-                }}
-              >
-                {/* Blue Overlay */}
-                <div className="absolute inset-0" />
-              </motion.div>
-            )
-        )}
+      <AnimatePresence initial={false} custom={direction} mode="wait">
+        <motion.div
+          key={slides[current].id}
+          custom={direction}
+          variants={slideVariants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          transition={{
+            x: { type: "spring", stiffness: 200, damping: 35 },
+            opacity: { duration: 0.6 },
+          }}
+          className="absolute inset-0"
+        >
+          <div
+            className="w-full h-full bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: `url(${slides[current].image})`,
+            }}
+          />
+          {/* Clean gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
+        </motion.div>
       </AnimatePresence>
+
+      {/* Navigation Arrows */}
+      <button
+        onClick={handlePrev}
+        className="absolute left-6 md:left-10 top-1/2 -translate-y-1/2 z-20 bg-white/5 hover:bg-white/15 backdrop-blur-md p-3 md:p-4 rounded-full transition-all duration-300 hover:scale-105 border border-white/10"
+        aria-label="Previous slide"
+      >
+        <ChevronLeft className="h-5 w-5 md:h-6 md:w-6 text-white" />
+      </button>
+
+      <button
+        onClick={handleNext}
+        className="absolute right-6 md:right-10 top-1/2 -translate-y-1/2 z-20 bg-white/5 hover:bg-white/15 backdrop-blur-md p-3 md:p-4 rounded-full transition-all duration-300 hover:scale-105 border border-white/10"
+        aria-label="Next slide"
+      >
+        <ChevronRight className="h-5 w-5 md:h-6 md:w-6 text-white" />
+      </button>
 
       {/* Content */}
       <div className="relative z-10 flex h-full items-center">
-        <div className="container mx-auto px-6 lg:px-8">
-          <div className="max-w-2xl">
+        <div className="container mx-auto px-6 lg:px-12">
+          <div className="max-w-3xl">
             {/* Main Heading */}
-            <motion.h1
-              key={slides[current].id}
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.6 }}
-              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-black mb-8"
-            >
-              {slides[current].title}
-            </motion.h1>
+            <div className="overflow-hidden mb-8">
+              <motion.h1
+                key={`title-${slides[current].id}`}
+                initial={{ y: 80, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -80, opacity: 0 }}
+                transition={{
+                  duration: 0.8,
+                  type: "spring",
+                  stiffness: 80,
+                }}
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight tracking-tight"
+              >
+                {slides[current].title}
+              </motion.h1>
+            </div>
 
             {/* Breadcrumb */}
-            <nav className="flex items-center space-x-2 text-sm text-white/80">
-              <span className="hover:text-black cursor-pointer text-black transition-colors">
+            <motion.nav
+              key={`breadcrumb-${slides[current].id}`}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="flex items-center space-x-2 text-sm md:text-base text-white/60"
+            >
+              <span className="hover:text-white cursor-pointer transition-colors">
                 Home
               </span>
               <ChevronRight className="h-4 w-4" />
-              <span className="hover:text-black cursor-pointer text-black transition-colors">
+              <span className="hover:text-white cursor-pointer transition-colors">
                 Solution
               </span>
               <ChevronRight className="h-4 w-4" />
-              <span className="text-black">{slides[current].title}</span>
-            </nav>
+              <span className="text-white">{slides[current].title}</span>
+            </motion.nav>
           </div>
         </div>
       </div>
 
-      {/* Slide Dots */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-2">
-        {slides.map((_, i) => (
+      {/* Modern Progress Indicators */}
+      <div className="absolute bottom-8 md:bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-3 z-20">
+        {slides.map((slide, i: number) => (
           <button
             key={i}
-            onClick={() => setCurrent(i)}
+            onClick={() => handleDotClick(i)}
             aria-label={`Go to slide ${i + 1}`}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
-              i === current ? "bg-white w-6" : "bg-white/50"
-            }`}
-          />
+            className="group relative"
+          >
+            {/* Base indicator */}
+            <div
+              className={`transition-all duration-300 rounded-full ${
+                i === current
+                  ? "w-12 h-3 bg-white"
+                  : "w-3 h-3 bg-white/40 hover:bg-white/60"
+              }`}
+            />
+
+            {/* Progress ring */}
+            {i === current && (
+              <svg
+                className="absolute -inset-2.5 -rotate-90"
+                width="32"
+                height="32"
+                viewBox="0 0 32 32"
+              >
+                <circle
+                  cx="16"
+                  cy="16"
+                  r="14"
+                  stroke="white"
+                  strokeWidth="2"
+                  fill="none"
+                  opacity="0.2"
+                />
+                <motion.circle
+                  cx="16"
+                  cy="16"
+                  r="14"
+                  stroke="white"
+                  strokeWidth="2"
+                  fill="none"
+                  strokeDasharray={`${2 * Math.PI * 14}`}
+                  strokeDashoffset={`${2 * Math.PI * 14 * (1 - progress / 100)}`}
+                  style={{ transition: "stroke-dashoffset 0.05s linear" }}
+                />
+              </svg>
+            )}
+          </button>
         ))}
       </div>
 
-      {/* Section below the banner */}
+      {/* Slide Counter */}
+      <motion.div
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 0.5 }}
+        className="absolute bottom-8 md:bottom-10 right-6 md:right-10 text-white/90 text-sm md:text-base font-medium backdrop-blur-sm bg-white/5 px-4 md:px-5 py-2 md:py-3 rounded-full z-20 border border-white/10"
+      >
+        <span className="text-lg md:text-xl font-semibold">{String(current + 1).padStart(2, "0")}</span>
+        <span className="text-white/40 mx-1.5">/</span>
+        <span className="text-white/60">{String(slides.length).padStart(2, "0")}</span>
+      </motion.div>
     </section>
   )
 }

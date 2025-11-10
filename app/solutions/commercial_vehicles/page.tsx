@@ -4,8 +4,8 @@ import React from "react";
 import MenuItem from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import EVChargingHero from "./hero";
-import EnergyStorageSection from "./energy-storage-section";
 import CommercialHero from "./commercial-hero";
+import EnergyStorageSection from "./energy-storage-section";
 
 export default function EVChargingPage() {
   return (
@@ -15,8 +15,9 @@ export default function EVChargingPage() {
       </header>
       <main className="flex flex-col items-center px-4 sm:px-0">
         < CommercialHero />
+      
         <EVChargingHero />
-         <EnergyStorageSection />
+          <EnergyStorageSection/>
        
         {/* Add more EV charging solution details/components here */}
       </main>

@@ -8,46 +8,16 @@ import { motion } from "framer-motion"
 
 const milestones = [
   {
-    year: "1985",
-    title: "Humble Beginnings",
-    description: "Started as a small family garage with just 2 mechanics and a passion for quality automotive repair.",
+    title: "Founding Ideation",
+    description: "STF Automotive takes its name from the first letters of its founders—Shazzad, Taher, and Forhad.The journey began in 2024, when Taher shared an idea with Shazzad to build an electric cycle. Together, they started working on the project and quickly discovered its huge potential. Delivery riders, office commuters, and regular cyclists all showed strong interest—",
     icon: Wrench,
     image: "/images/workshop/w1.jpg",
   },
   {
-    year: "1992",
-    title: "First Expansion",
-    description: "Expanded to a 5-bay facility and introduced specialized services for European vehicles.",
+    title: "Humbel Bigining",
+    description: " the market was filled with high-priced, low-quality e-cycles.Seeing this gap, they focused on creating a better, cost-effective electric cycle with high quality and stylish design that outperformed existing options. Later, Forhad Ahmed Talha joined the team, and the three partners decided to launch a company built on the promise of performance and quality.From the beginning, their philosophy has been to showcase the craftsmanship, design, and engineering power of Bangladesh to the world.",
     icon: MapPin,
     image: "/images/workshop/w2.jpg",
-  },
-  {
-    year: "2001",
-    title: "Digital Revolution",
-    description: "Implemented computerized diagnostic systems and became certified for hybrid vehicle maintenance.",
-    icon: Car,
-    image: "/images/workshop/w3.jpg",
-  },
-  {
-    year: "2010",
-    title: "Award Recognition",
-    description: "Received 'Best Auto Service' award and expanded team to 15 certified technicians.",
-    icon: Award,
-    image: "/images/workshop/w4.jpg",
-  },
-  {
-    year: "2018",
-    title: "Modern Facility",
-    description: "Moved to our current state-of-the-art 12,000 sq ft facility with advanced equipment.",
-    icon: Users,
-     image: "/images/workshop/w5.jpg",
-  },
-  {
-    year: "2024",
-    title: "Electric Future",
-    description: "Became certified for electric vehicle service and installed EV charging stations.",
-    icon: Bike,
-     image: "/images/workshop/w6.jpg",
   },
 ]
 
@@ -76,9 +46,6 @@ export default function WorkshopHistory() {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <Badge variant="outline" className="mb-4">
-              Since 1985
-            </Badge>
           </motion.div>
           <motion.h1 
             className="text-4xl md:text-6xl font-bold text-foreground mb-6 text-balance"
@@ -206,9 +173,6 @@ export default function WorkshopHistory() {
                           <div className="inline-flex items-center justify-center w-10 h-10 bg-primary/10 rounded-lg">
                             <milestone.icon className="w-5 h-5 text-primary" />
                           </div>
-                          <Badge variant="secondary" className="font-mono">
-                            {milestone.year}
-                          </Badge>
                         </motion.div>
                         <motion.h3 
                           className="text-xl font-semibold text-foreground mb-3"
@@ -237,137 +201,6 @@ export default function WorkshopHistory() {
           </div>
         </div>
       </section>
-
-      {/* Values Section */}
-      <section className="py-20 px-4 bg-card">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Built on Strong Values</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              These core principles have guided us through nearly four decades of service.
-            </p>
-          </motion.div>
-
-          <motion.div 
-            className="grid md:grid-cols-3 gap-8"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={{
-              hidden: { opacity: 0 },
-              visible: {
-                opacity: 1,
-                transition: {
-                  staggerChildren: 0.2
-                }
-              }
-            }}
-          >
-            {[
-              { icon: Award, title: "Quality First", desc: "Every repair, every service, every interaction is held to the highest standards of excellence." },
-              { icon: Users, title: "Community Focus", desc: "We are not just a business, we are neighbors committed to keeping our community moving." },
-              { icon: Wrench, title: "Innovation", desc: "Continuously evolving with technology to provide the best possible service experience." }
-            ].map((value, index) => (
-              <motion.div 
-                key={index}
-                variants={{
-                  hidden: { opacity: 0, y: 30 },
-                  visible: { opacity: 1, y: 0 }
-                }}
-                whileHover={{ y: -10 }}
-                transition={{ duration: 0.6 }}
-              >
-                <Card className="text-center p-8 hover:shadow-lg transition-shadow duration-300">
-                  <motion.div 
-                    className="inline-flex items-center justify-center w-16 h-16 bg-primary/10 rounded-lg mb-6"
-                    whileHover={{ rotate: 360, scale: 1.1 }}
-                    transition={{ duration: 0.6 }}
-                  >
-                    <value.icon className="w-8 h-8 text-primary" />
-                  </motion.div>
-                  <motion.h3 
-                    className="text-xl font-semibold text-foreground mb-4"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ duration: 0.4 }}
-                    viewport={{ once: true }}
-                  >
-                    {value.title}
-                  </motion.h3>
-                  <motion.p 
-                    className="text-muted-foreground"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ duration: 0.4, delay: 0.2 }}
-                    viewport={{ once: true }}
-                  >
-                    {value.desc}
-                  </motion.p>
-                </Card>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <motion.section 
-        className="py-20 px-4 bg-gradient-to-br from-primary/5 to-secondary/10"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-      >
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.h2 
-            className="text-3xl md:text-4xl font-bold text-foreground mb-6"
-            initial={{ y: 20 }}
-            whileInView={{ y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            Ready to Be Part of Our Story?
-          </motion.h2>
-          <motion.p 
-            className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto"
-            initial={{ y: 20, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-          >
-            Experience the difference that four decades of expertise makes. Join thousands of satisfied customers who
-            trust us with their vehicles.
-          </motion.p>
-          <motion.div 
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            viewport={{ once: true }}
-          >
-            <motion.button 
-              className="px-8 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Schedule Service
-            </motion.button>
-            <motion.button 
-              className="px-8 py-3 border border-border text-foreground rounded-lg font-medium hover:bg-accent transition-colors"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Contact Us
-            </motion.button>
-          </motion.div>
-        </div>
-      </motion.section>
     </div>
   )
 }

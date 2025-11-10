@@ -4,8 +4,8 @@ import React from "react";
 import MenuItem from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import CommercialHero from "./twowheeler-hero";
-import { AdvantagesSection } from "./advantage-sec";
 import EnergyStorageSection from "./energy-storage-section";
+import ThreeAdvantages from "./advantage-sec";
 
 export default function TwoWhilerPage() {
   return (
@@ -15,7 +15,7 @@ export default function TwoWhilerPage() {
       </header>
       <main className="flex flex-col items-center px-4 sm:px-0">
         < CommercialHero/>
-        <AdvantagesSection/>
+        <ThreeAdvantages/>
          <EnergyStorageSection/>
         
         {/* Add more EV charging solution details/components here */}
